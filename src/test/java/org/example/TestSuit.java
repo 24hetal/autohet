@@ -1,12 +1,8 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import static java.lang.System.getProperty;
 
 public class TestSuit extends BaseTest {
 
@@ -17,16 +13,26 @@ public class TestSuit extends BaseTest {
     RegistrationSuccessPage registrationSuccessPage = new RegistrationSuccessPage();
 
     ShoppingCart shoppingCart = new ShoppingCart();
+
     BuildYourOwnComputerPage buildYourOwnComputerPage = new BuildYourOwnComputerPage();
-    EmailAfriend emailAfriend = new EmailAfriend();
+
+    EmailFriendMessage emailFriendMessage = new EmailFriendMessage();
+
     EmailAFriendDetailsPage emailAFriendDetailsPage = new EmailAFriendDetailsPage();
+
     CurrencySuccessPage currencySuccessPage = new CurrencySuccessPage();
+
+    BuildComputer desktopBuildComputer = new BuildComputer();
+
+    DesktopPage desktopPage = new DesktopPage();
+
+    NopCommerceNewPage nopCommerceNewPage = new NopCommerceNewPage();
 
     // all your test cases with @Test#
 
-    @Test
+    @Test(priority = 1)
     public void userShouldBeAbleToRegisterSuccessfully() {
-        // click on register button//////////////////
+        // click on register button
         homePage.clickOnRegisterButton();
         //enter registration details
         registrationPage.userEntersRegistrationDetails();
@@ -34,8 +40,9 @@ public class TestSuit extends BaseTest {
         registrationSuccessPage.verifyUserRegisteredSuccessfully();
     }
 
-    @Test
+    @Test(priority = 2)
     public void userShouldBeAbleToAddProductToAddToCart() {
+        //
         homePage.clickOnComputers();
         homePage.clickOnDesktop();
         buildYourOwnComputerPage.BuildYourOwnComputerPage();
@@ -43,44 +50,90 @@ public class TestSuit extends BaseTest {
 
     }
 
-    @Test
-    public void userShouldBeAbleToSReferAProductToAFriendThrouhEmail() {
+    @Test(priority = 3)
+    public void userShouldBeAbleToSReferAProductToAFriendThroughEmail() {
+        userShouldBeAbleToRegisterSuccessfully();
         homePage.clickOnComputers();
         homePage.clickOnDesktop();
-        buildYourOwnComputerPage.BuildYourOwnComputerPage();
-        emailAfriend.userEmailAFriend();
+        desktopBuildComputer.clickOnBuildComputer();
         emailAFriendDetailsPage.UserCanEmailADetailsOnThisPage();
+        emailFriendMessage.userEmailAFriend();
 
     }
 
-    @Test
+    @Test(priority = 4)
     public void CurrencyForProduct() {
         //select currency
         homePage.clickOnCurrency();
-        currencySuccessPage.userCanSeeMessage();
-    }
-
-        @Test
-        public void registerUserShouldBeAbleToVote(){
-
-                //Verify that user is not able to vote without being registered
-            homePage.verifyWithoutRegisterUserAbleToVote();
-
-                //click on register button
-            homePage.clickOnRegisterButton();
-
-            // click on register button//////////////////
-            homePage.clickOnRegisterButton();
-            //enter registration details
-            registrationPage.userEntersRegistrationDetails();
-            // verify user registered successfully
-            registrationSuccessPage.verifyUserRegisteredSuccessfully();
-                //verify registered user is able to vote
-            homePage.verifyWithoutRegisterUserAbleToVote();
 
     }
 
+    @Test(priority = 5)
+    public void registerUserShouldBeAbleToVote() {
+        homePage.verifyIfNonRegisteredUserIsAbleToVote();
+        userShouldBeAbleToRegisterSuccessfully();
+        homePage.verifyRegisteredUserIsAbleToVote();
     }
+
+    @Test(priority = 6)
+    public void productTitle() {
+        // get product title
+        homePage.getProductTitle();
+    }
+
+//    public void verifyMyLoadProp(){
+//        System.out.println( getProperty("url"));
+
+    @Test (priority = 7)
+    public void userShouldBeAbleToSeePopUp(){
+        // verify user can see alert popup
+        homePage.voteAlertPopup();
+    }
+
+    @Test (priority = 8)
+
+    //click on facebook icon
+    public void UserShouldBeAbleToNavigateToTheFacebookPage(){
+        homePage.ClickOnFacebookIcon();
+    }
+
+
+    @Test (priority = 9)
+    //search text box enter nike
+    public void UserShouldBeAbleToSearchProductByProductName(){
+        homePage.enterWordInSearchTextBox("Nike"); //Apple
+    }
+
+    @Test
+    //user able to sort by product by Z to A
+    public void UserShouldBeAbleToVerifyProductAccordingAlphabeticallyZToA(){
+        homePage.clickOnComputers();
+        homePage.clickOnDesktop();
+        //select Z to A option in sort by
+        desktopPage.clickOnSortByZtoAOption();
+        //verify all product in Z to A
+        desktopPage.verifyProductListInZtoAFormat();
+
+    }
+    @Test (priority = 10)
+    public void verifyUsersCommentHasSuccessfullyAddedTotheCommentList(){
+
+        //NonCommerceNewRelease
+        homePage.clickOnDetailsButtons();
+        //nopcommerce new release assert Point
+        nopCommerceNewPage.checkURLOfThePage();
+        //Enter Title
+        nopCommerceNewPage.enterTitle();
+        //Enter comment
+        nopCommerceNewPage.enterComment();
+
+    }
+}
+
+
+
+
+
 
 
 

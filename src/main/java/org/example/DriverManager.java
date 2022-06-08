@@ -7,17 +7,30 @@ import java.time.Duration;
 
 public class DriverManager extends Utils {
 
-    String browserName ="Chrome";
+    String browserName ="chrome";
+
     public void startOfBrowser(){
 
-        if (browserName.equalsIgnoreCase("Chrome"))
-        {
-            System.setProperty("webDriver.chrome.driver", "src/test/java/drivers/chromedriver.exe");
-            driver = new ChromeDriver();
-        }
-        else if(browserName.equalsIgnoreCase("Firefox")){
-            System.setProperty("webDriver.gecko.driver","src/test/java/drivers/geckodriver.exe" );
+        //Chrome
+        if(browserName.equalsIgnoreCase("Chrome")) {
+            //Open Chrome
+            System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver.exe");
+            driver = new ChromeDriver();  // import chrome web-Driver dependency (In 'POM' file)
+
+        }else if(browserName.equalsIgnoreCase("Firefox")){
+
+            System.setProperty("webdriver.gecko.driver","src/test/java/drivers/geckodriver.exe");
             driver= new FirefoxDriver();
+
+            //Edge
+        }else if(browserName.equalsIgnoreCase("Edge")){
+            //Edge
+            System.setProperty("webdriver.edge.driver","");
+            //instance of EdgeDriver
+            driver = new EdgeDriver();
+        }else{
+            System.out.println("You Entered un-valid Browser name :" + browserName);
+
         }
 
         //open chrome browser
@@ -26,6 +39,8 @@ public class DriverManager extends Utils {
         driver.manage().window().maximize();
         driver.get("https://demo.nopcommerce.com/");
     }
+
+
     //close browser
     public void closeTheBrowser(){
         driver.quit();
