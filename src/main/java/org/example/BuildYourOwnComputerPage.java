@@ -12,35 +12,45 @@ public class BuildYourOwnComputerPage extends Utils {
     private By _HDD = By.name("product_attribute_3");
     private By _OS = By.name("product_attribute_4");
     private By _software = By.xpath("//input[@name=\"product_attribute_5\"]");
-    private By _addtocart = By.xpath("//button[@id=\"add-to-cart-button-1\"]");
+    private By _addToCart = By.xpath("//button[@id=\"add-to-cart-button-1\"]");
 
     public void BuildYourOwnComputerPage() { //select processor
 
 
-        Select processor = new Select(driver.findElement(By.name("product_attribute_1")));
-        processor.selectByIndex(1);
+        clickOnElement(By.xpath("//ul[@class='top-menu notmobile']//a[text()='Computers ']"));
 
-        //select RAM
-        Select ram = new Select(driver.findElement(By.name("product_attribute_2")));
-        ram.selectByIndex(1);
+        //  click on desktop
+        clickOnElement(By.xpath("//img[@alt=\"Picture for category Desktops\"]"));
 
-        //select HDD
-        clickOnElement(By.name("product_attribute_3"));
+        //   click on Build your own computer
+        clickOnElement(By.xpath("//h2[@class=\"product-title\"]/a[@href=\"/build-your-own-computer\"]"));
 
-        //select OS
-        clickOnElement(By.name("product_attribute_4"));
+        //select on processor 2.2GHZ
+        Select Processor = new Select(driver.findElement(By.id("product_attribute_1")));
+        Processor.selectByValue("1");
 
-        //select software
-        List<WebElement> elements = driver.findElements(By.xpath("//input[@name=\"product_attribute_5\"]"));
-        System.out.println(Integer.toString(elements.size()));
-        for (WebElement el : elements)
-            el.click();
+        //select on RAM  2 GB
+        Select Ram = new Select(driver.findElement(By.id("product_attribute_2")));
+        Ram.selectByValue("3");
 
-            //click add to cart button
-            clickOnElement(By.xpath("//button[@id=\"add-to-cart-button-1\"]"));
+        //click on radio 320gb
+        clickOnElement(By.xpath("//label[@for=\"product_attribute_3_6\"]"));
 
-            //click on add to cart
-            clickOnElement(By.xpath("//div/div[1]/div/div[2]/div[3]/div[2]/button[@class=\"button-2 product-box-add-to-cart-button\"]"));
-        }
+        //click on vista primium
+        clickOnElement(By.xpath("//label[@for=\"product_attribute_4_9\"]"));
+
+        //tick  on Microsoft Office [+$50.00]
+        clickOnElement(By.xpath("//label[@for=\"product_attribute_5_11\"] "));
+
+        //tick  on Acrobat Reader [+$10.00]
+        clickOnElement(By.xpath("//input[@value=\"12\"]"));
+
+        //tick on  Total Commander [+$5.00]
+        clickOnElement(By.xpath("//button[@id=\"add-to-cart-button-1\"]"));
+
+        //click on Add to CART
+        clickOnElement(By.xpath("//span[@class=\"cart-label\"]"));
+
+    }
 
     }

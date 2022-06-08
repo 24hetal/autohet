@@ -4,59 +4,67 @@ import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-public class RegistrationPage extends Utils{
+
+public class RegistrationPage extends Utils {
+
+    LoadProp loadProp = new LoadProp();
+
+    private By _radiobutton = By.xpath("//input[@id=\"gender-female\"]");
+    private By _firstname = By.xpath("//input[@name='FirstName']");
+    private By _lastname = By.id("LastName");
+    private By _dateOfBirth = By.name("DateOfBirthDay");
+    private By _dateOfBirthMonth = By.name("DateOfBirthMonth");
+    private By _dateOfBirthyear = By.name("DateOfBirthYear");
+    private By _Email = By.id("Email");
+    private By _password = By.id("Password");
+    private By _confirmPassword = By.id("ConfirmPassword");
+    private By _registerButton = By.id("register-button");
 
 
-    public void verifyUserIsOnRegistrationPage(){
-      String actualRegistrationUrl = driver.getCurrentUrl();
-
-      Assert.assertTrue(actualRegistrationUrl.contains("registration"), " negative your registration url ");
+    public void verifyUserIsOnRegistrationPage() {
+        String actualRegistrationUrl = driver.getCurrentUrl();
+        //Assert.assertTrue(actualRegistrationUrl.contains("registration"), " negative your registration url ");
+        Assert.assertTrue(driver.getCurrentUrl().contains(loadProp.getProperty("UserIsOnRegisterPageContains")));
     }
+
     public void userEntersRegistrationDetails() {
-
         //select gender  female Radio button//////////////////////
-        clickOnElement(By.xpath("//input[@id=\"gender-female\"]"));
-
+        clickOnElement(_radiobutton);
         // enter firstname///////////////////////
-        //driver.findElement(By.xpath("//input[@name='FirstName']")).sendKeys("Hetal");
-        clickOnElement(By.xpath("//input[@name='FirstName']"));
-        typeText(By.xpath("//input[@name='FirstName']"), "Hhhhh");
-
-        //select last name
-        //enter lastname
-        //driver.findElement(By.id("LastName")).sendKeys("Patel");
-        typeText(By.id("LastName"), "Patel");
-        clickOnElement(By.id("LastName"));
+        typeText(_firstname, loadProp.getProperty("FirstName"));
+        //enter LastName;
+        typeText(_lastname, loadProp.getProperty("LastName"));
 
         // select birthdate ////////////////
-        Select birthDay = new Select(driver.findElement(By.name("DateOfBirthDay")));
-        birthDay.selectByValue("24");
-
+        Select BirthDay = new Select(driver.findElement(_dateOfBirth));
+        BirthDay.selectByValue("24");
+        // selectByDropdownIndexValue()
         //select month
-        Select BirthMonth = new Select(driver.findElement(By.name("DateOfBirthMonth")));
+        Select BirthMonth = new Select(driver.findElement(_dateOfBirthMonth));
         BirthMonth.selectByValue("8");
 
         //select year;
-        Select BirthYear = new Select(driver.findElement(By.name("DateOfBirthYear")));
+        Select BirthYear = new Select(driver.findElement(_dateOfBirthyear));
         BirthYear.selectByVisibleText("1984");
 
         //enter email address
+        //typeText(By.id("Email"),"hetalpatel@gmail.com"+RandomDate() + "@gmail.com");
+        typeText(_Email,loadProp.getProperty("hetalpatel@gmail.com"+RandomDate() + "@gmail.com"));
 //       driver.findElement(By.id("Email")).sendKeys("hetalpatel@gmail.com");
-        driver.findElement(By.id("Email")).sendKeys("eeeee" + RandomDate() + "gmail.com");
-        typeText(By.id("Email"), "hetalpatel@gmail.com");
+        //driver.findElement(By.id("Email")).sendKeys("hetal" + RandomDate() + "gmail.com");
+        ////// typeText(_Email,(Email)); //("hetalpatel@gmail.com"));
 
         // enter password
-//        driver.findElement(By.id("Password")).sendKeys("hetalllll");
-        //driver.findElement(By.xpath("//input[@id=\"Password\"]")).sendKeys("ooooooooo");
-        typeText(By.id("Password"), "hetalllll");
+//
+        typeText(_password, loadProp.getProperty("Password"));//hetal1234
 
         //confirm password
-//        driver.findElement(By.id("ConfirmPassword")).sendKeys("hetalllll");
-        // driver.findElement(By.xpath("//input[@id=\"ConfirmPassword\"]")).sendKeys("ooooooooo");
-        typeText(By.id("ConfirmPassword"), "hetalllll");
+//
+        typeText(_confirmPassword, loadProp.getProperty("ConfirmPassword"));//"hetal1234"
 
         ///click register button
-        // driver.findElement(By.id("register-button")).click();
-        //gettext from(By.id("//button[@id=\"register-button\"]"));
-        clickOnElement(By.xpath("//button[@id=\"register-button\"]"));
-    }}
+
+        //clickOnElement(By.xpath("//button[@id=\"register-button\"]"));
+        //clickOnElement(_registerButton,loadProp.getProperty("RegisterButton"));
+    }
+}
