@@ -28,6 +28,11 @@ public class RegistrationPage extends Utils {
     }
 
     public void userEntersRegistrationDetails() {
+        try {
+            Thread.sleep(Long.parseLong("300"));
+        }catch (InterruptedException e){
+
+        }
         //select gender  female Radio button//////////////////////
         clickOnElement(_radiobutton);
         // enter firstname///////////////////////

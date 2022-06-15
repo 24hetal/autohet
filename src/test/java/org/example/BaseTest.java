@@ -20,6 +20,7 @@ import org.testng.annotations.BeforeMethod;
                 takeSnapShot(result.getName());
             }
             driverManager.closeTheBrowser();
+            driver.quit();
         }
 
     }

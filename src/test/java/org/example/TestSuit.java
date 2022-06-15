@@ -80,10 +80,10 @@ public class TestSuit extends BaseTest {
         // get product title
         homePage.getProductTitle();
     }
-
-//    public void verifyMyLoadProp(){
-//        System.out.println( getProperty("url"));
-
+    @Test
+    public void verifyMyLoadProp() {
+    System.out.println(getProperty("url"));
+}
     @Test (priority = 7)
     public void userShouldBeAbleToSeePopUp(){
         // verify user can see alert popup
@@ -129,6 +129,7 @@ public class TestSuit extends BaseTest {
 
     }
 }
+
 
 
 
