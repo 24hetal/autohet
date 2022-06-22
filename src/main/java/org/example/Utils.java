@@ -7,6 +7,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -114,4 +115,14 @@ public class Utils extends BasePage {
             e.printStackTrace();
         }
     }
+    public static void verifyCurrentUrl(String url){
+        Assert.assertEquals(driver.getCurrentUrl(),url);
+
+    }
+    //web driver WebDriverWait methods//
+    public static void driverWaitForElementTobeClickable(By by, int time) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        wait.until(ExpectedConditions.elementToBeClickable(by)).click();
+    }
+
 }

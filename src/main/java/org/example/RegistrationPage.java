@@ -1,70 +1,55 @@
 package org.example;
-
-import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-
 public class RegistrationPage extends Utils {
 
-    LoadProp loadProp = new LoadProp();
-
-    private By _radiobutton = By.xpath("//input[@id=\"gender-female\"]");
-    private By _firstname = By.xpath("//input[@name='FirstName']");
+    private By _genderFemale = By.id("gender-female");
+    private By _firstname = By.id("FirstName");
     private By _lastname = By.id("LastName");
-    private By _dateOfBirth = By.name("DateOfBirthDay");
+    private By _dateOfBirthDay = By.name("DateOfBirthDay");
     private By _dateOfBirthMonth = By.name("DateOfBirthMonth");
-    private By _dateOfBirthyear = By.name("DateOfBirthYear");
+    private By _dateOfBirthYear = By.name("DateOfBirthYear");
     private By _Email = By.id("Email");
-    private By _password = By.id("Password");
-    private By _confirmPassword = By.id("ConfirmPassword");
-    private By _registerButton = By.id("register-button");
+    private By _Password = By.id("Password");
+    private By _ConfirmPassword = By.id("ConfirmPassword");
+    private By _registerbutton = By.id("registerbutton");
 
+    public void userEnterRegistrationDetails() {
+        //select gender male or female Radio button
+        clickOnElement(_genderFemale); //radio button
 
-    public void verifyUserIsOnRegistrationPage() {
-        String actualRegistrationUrl = driver.getCurrentUrl();
-        //Assert.assertTrue(actualRegistrationUrl.contains("registration"), " negative your registration url ");
-        Assert.assertTrue(driver.getCurrentUrl().contains(loadProp.getProperty("UserIsOnRegisterPageContains")));
-    }
+        //Enter First Name------------------------
+        //
+        typeText(_firstname, "Hetal");
 
-    public void userEntersRegistrationDetails() {
-        //select gender  female Radio button//////////////////////
-        clickOnElement(_radiobutton);
-        // enter firstname///////////////////////
-        typeText(_firstname, loadProp.getProperty("FirstName"));
-        //enter LastName;
-        typeText(_lastname, loadProp.getProperty("LastName"));
+        //Enter Last Name-------------------------
+        typeText(By.id("LastName"), "Patel");
 
-        // select birthdate ////////////////
-        Select BirthDay = new Select(driver.findElement(_dateOfBirth));
-        BirthDay.selectByValue("24");
-        // selectByDropdownIndexValue()
-        //select month
-        Select BirthMonth = new Select(driver.findElement(_dateOfBirthMonth));
-        BirthMonth.selectByValue("8");
+        //Date of birth day----------------------
+        Select birthDay = new Select(driver.findElement(By.name("DateOfBirthDay")));//select on the day
+        birthDay.selectByIndex(24);
 
-        //select year;
-        Select BirthYear = new Select(driver.findElement(_dateOfBirthyear));
-        BirthYear.selectByVisibleText("1984");
+        //Date of birth month---------------------
+        Select birtMonth = new Select(driver.findElement(By.name("DateOfBirthMonth")));//select on month
+        birtMonth.selectByIndex(8);
 
-        //enter email address
-        //typeText(By.id("Email"),"hetalpatel@gmail.com"+RandomDate() + "@gmail.com");
-        typeText(_Email,loadProp.getProperty("hetalpatel@gmail.com"+RandomDate() + "@gmail.com"));
-//       driver.findElement(By.id("Email")).sendKeys("hetalpatel@gmail.com");
-        //driver.findElement(By.id("Email")).sendKeys("hetal" + RandomDate() + "gmail.com");
-        ////// typeText(_Email,(Email)); //("hetalpatel@gmail.com"));
+        //Date of birth year--------------------
+        Select birthYear = new Select(driver.findElement(By.name("DateOfBirthYear")));//select on year
+        birthYear.selectByVisibleText("1990");
 
-        // enter password
-//
-        typeText(_password, loadProp.getProperty("Password"));//hetal1234
+        //Enter Email----------------------------
+        System.out.println(RandomDate());
+        typeText(By.id("Email"), "hetal.patel" +RandomDate() + "@gmail.com");//without locater
 
-        //confirm password
-//
-        typeText(_confirmPassword, loadProp.getProperty("ConfirmPassword"));//"hetal1234"
+        //Enter password
+        typeText(_Password,"Test1234" );
 
-        ///click register button
+        //Enter confirm password
+        typeText(_ConfirmPassword,"Test1234" );
 
-        //clickOnElement(By.xpath("//button[@id=\"register-button\"]"));
-        //clickOnElement(_registerButton,loadProp.getProperty("RegisterButton"));
+        //Click on register button------------------------
+        //
+        clickOnElement(By.id("register-button"));
     }
 }

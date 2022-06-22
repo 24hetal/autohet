@@ -3,6 +3,8 @@ package org.example;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -18,6 +20,7 @@ public class HomePage extends Utils {
     private By _clickDesktop = By.linkText("Desktops");
     private By _euroCurrency = By.id("customerCurrency");
     private By _clickOnVoteButton = By.xpath("//button[@class=\"button-2 vote-poll-button\"]");
+    private By _categoryName = By.linkText("categoryname");
 
     ////public void verifyUserOnHomepage(){
 ////    driverWaitsUntillURLTobeClickable(B);
@@ -173,8 +176,47 @@ public class HomePage extends Utils {
             System.out.println(e.getText());
         }
     }
-    public void clickOnDetailsButtons(){
-        // click on details button
-        clickOnElement(By.xpath("/html/body/div[6]/div[3]/div/div/div/div/div[5]/div[2]/div[2]/div[3]/a"));
+
+public void clickOnCategoryLink(String categoryName){
+        clickOnElement(By.linkText(categoryName));
+}
     }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public void clickOnDetailsButtons(){
+//        // click on details button
+//        clickOnElement(By.xpath("/html/body/div[6]/div[3]/div/div/div/div/div[5]/div[2]/div[2]/div[3]/a"));
+//    }
+//    public void navigateToSubcategoryPageHover(String categoryName, String subcategoryName) {
+//        Actions actions = new Actions(driver);
+//        Action hoverOverCategory = actions.moveToElement(driver.findElement(By.linkText(_categoryName)))
+//                .moveToElement(driver.findElement(By.xpath("//ul[@class='top-menu notmobile']//a[contains(text)," + subcatagoryName + ")]")))//perameterized xpath
+//                                      .click().build();
+//        hoverOverCatagory.perform();
+////    Assert.assertTrue(driver.getCurrentUrl().contains("desktops"));
+////}
+//
+//////-Dbrowser=chrome    <---rundebug configeretion code#
