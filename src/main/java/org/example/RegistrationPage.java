@@ -54,10 +54,14 @@ public class RegistrationPage extends Utils {
 
         //enter email address
         //typeText(By.id("Email"),"hetalpatel@gmail.com"+RandomDate() + "@gmail.com");
-        typeText(_Email,loadProp.getProperty("hetalpatel@gmail.com"+RandomDate() + "@gmail.com"));
+        //typeText(_Email,loadProp.getProperty("hetalpatel@gmail.com"+RandomDate() + "@gmail.com"));
 //       driver.findElement(By.id("Email")).sendKeys("hetalpatel@gmail.com");
         //driver.findElement(By.id("Email")).sendKeys("hetal" + RandomDate() + "gmail.com");
         ////// typeText(_Email,(Email)); //("hetalpatel@gmail.com"));
+        String email = loadProp.getProperty("Email1") + RandomDate() + loadProp.getProperty("Email2");
+        System.out.println(email);
+        typeText(By.id("Email"), email);
+
 
         // enter password
 //
@@ -67,9 +71,9 @@ public class RegistrationPage extends Utils {
 //
         typeText(_confirmPassword, loadProp.getProperty("ConfirmPassword"));//"hetal1234"
 
-        ///click register button
+        //click register button
 
-        //clickOnElement(By.xpath("//button[@id=\"register-button\"]"));
+        clickOnElement(By.xpath("//button[@id=\"register-button\"]"));
         //clickOnElement(_registerButton,loadProp.getProperty("RegisterButton"));
     }
 }
